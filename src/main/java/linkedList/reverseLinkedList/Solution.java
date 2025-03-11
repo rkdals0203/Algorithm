@@ -1,4 +1,4 @@
-package main.java.linkedList.mergeTwoSortedLinkedLists;
+package main.java.linkedList.reverseLinkedList;
 import java.io.*;
 import java.math.*;
 import java.security.*;
@@ -52,33 +52,18 @@ public class Solution {
             }
         }
     }
-    static SinglyLinkedListNode mergeLists(SinglyLinkedListNode head1, SinglyLinkedListNode head2) {
-        if (head1 == null) return head2;
-        if (head2 == null) return head1;
+    public static SinglyLinkedListNode reverse(SinglyLinkedListNode llist) {
+        SinglyLinkedListNode prev = null;
+        SinglyLinkedListNode current = llist;
+        SinglyLinkedListNode next = null;
 
-        SinglyLinkedListNode head;
-        if((head1.data<=head2.data)){
-            head = head1;
-            head1 = head1.next;
-        } else {
-            head = head2;
-            head2 = head2.next;
+        while(current!=null){
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
         }
-
-        SinglyLinkedListNode current = head;
-        while(head1!=null && head2!=null) {
-            if(head1.data<=head2.data){
-                current.next = head1;
-                head1 = head1.next;
-            } else {
-                current.next = head2;
-                head2 = head2.next;
-            }
-            current = current.next;
-        }
-        if (head1 == null) current.next = head2;
-        if (head2 == null) current.next = head1;
-        return head;
+        return prev;
     }
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -89,33 +74,21 @@ public class Solution {
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
         for (int testsItr = 0; testsItr < tests; testsItr++) {
-            SinglyLinkedList llist1 = new SinglyLinkedList();
+            SinglyLinkedList llist = new SinglyLinkedList();
 
-            int llist1Count = scanner.nextInt();
+            int llistCount = scanner.nextInt();
             scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-            for (int i = 0; i < llist1Count; i++) {
-                int llist1Item = scanner.nextInt();
+            for (int i = 0; i < llistCount; i++) {
+                int llistItem = scanner.nextInt();
                 scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-                llist1.insertNode(llist1Item);
+                llist.insertNode(llistItem);
             }
 
-            SinglyLinkedList llist2 = new SinglyLinkedList();
+            SinglyLinkedListNode llist1 = reverse(llist.head);
 
-            int llist2Count = scanner.nextInt();
-            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
-            for (int i = 0; i < llist2Count; i++) {
-                int llist2Item = scanner.nextInt();
-                scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
-                llist2.insertNode(llist2Item);
-            }
-
-            SinglyLinkedListNode llist3 = mergeLists(llist1.head, llist2.head);
-
-            printSinglyLinkedList(llist3, " ", bufferedWriter);
+            printSinglyLinkedList(llist1, " ", bufferedWriter);
             bufferedWriter.newLine();
         }
 
@@ -124,4 +97,3 @@ public class Solution {
         scanner.close();
     }
 }
-
