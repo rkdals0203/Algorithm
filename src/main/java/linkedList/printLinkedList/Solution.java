@@ -44,8 +44,8 @@ public class Solution {
         if (head == null) return;
         System.out.println(head.data);
         printLinkedList(head.next);
-    }    private static final Scanner scanner = new Scanner(System.in);
-
+    }
+    private static final Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
         SinglyLinkedList llist = new SinglyLinkedList();
 
