@@ -11,21 +11,25 @@ import java.util.stream.*;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
+
 class Result {
+
     public static String isFibo(long n) {
+        if (n == 0 || n == 1) return "IsFibo";
         long n1 = 0;
         long n2 = 1;
-        long sum = 0;
-        while(sum <= n){
-            if (sum == n) return "IsFibo";
+        long sum;
+        while (n1+n2 <= n) {
+            if (n1+n2 == n) return "IsFibo";
             sum = n1+n2;
             n1 = n2;
             n2 = sum;
         }
         return "IsNotFibo";
     }
-
 }
+
+
 
 public class Solution {
     public static void main(String[] args) throws IOException {
