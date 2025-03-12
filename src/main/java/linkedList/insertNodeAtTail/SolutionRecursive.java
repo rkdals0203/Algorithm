@@ -42,8 +42,7 @@ public class SolutionRecursive {
         }
     }
     static SinglyLinkedListNode insertNodeAtTail(SinglyLinkedListNode head, int data) {
-        SinglyLinkedListNode newNode = new SinglyLinkedListNode(data);
-        if (head == null) return newNode;
+        if (head == null) return new SinglyLinkedListNode(data);
         head.next = insertNodeAtTail(head.next, data);
         return head;
     }
