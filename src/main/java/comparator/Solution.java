@@ -10,6 +10,7 @@ class Checker implements Comparator<Player>{
             return -1;
         }
         return a.name.compareTo(b.name);
+
     }
 }
 
