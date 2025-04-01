@@ -1,27 +1,52 @@
 package main.java.huffmanCoding;
 
-import java.util.HashMap;
+import java.util.*;
 
 public class Itm {
-    // 문자열의 각 문자 빈도수 계산
     public static HashMap<Character, Integer> calculateFrequency(String text) {
-        // TODO: 문자열의 각 문자 빈도수를 계산하여 HashMap에 저장하고 반환하세요.
-        // 예시: "hello" -> {'h':1, 'e':1, 'l':2, 'o':1}
-        return null;
+        HashMap<Character, Integer> freq = new HashMap<>();
+        for(char ch : text.toCharArray()){
+            freq.put(ch, freq.getOrDefault(ch, 0)+1);
+        }
+        return freq;
     }
     
-    // 텍스트 인코딩
-    public static String encode(String text, HashMap<Character, String> codes) {
-        // TODO: 주어진 텍스트를 허프만 코드를 사용하여 인코딩하세요.
-        // 예시: "hello" -> "0100110011" (실제 코드는 허프만 트리에 따라 다를 수 있음)
-        return null;
+    public static Node buildHuffmanTree(HashMap<Character, Integer> freq) {
+        PriorityQueue<Node> pq = new PriorityQueue<>();
+
+        for(HashMap.Entry<Character, Integer> entry : freq.entrySet()) {
+            pq.add(new Node(entry.getKey(), entry.getValue()));
+        }
+
+        while(pq.size() > 1) {
+            Node left = pq.poll();
+            Node right = pq.poll();
+            Node parent = new Node('', left.frequency + right.frequency);
+            parent.left = left;
+            parent.right = right;
+            pq.add(parent);
+        }
+        
+        return pq.poll();
     }
     
-    // 허프만 코딩 압축률 계산
+    public static String encode(String text) {
+        HashMap<Character, Integer> freq = calculateFrequency(text);
+        
+        Node tree = buildHuffmanTree(freq);
+        
+        HashMap<Character, String> codes = generateCodes(tree);
+        
+        String encoded = "";
+        for(char ch : text.toCharArray()) {
+            encoded += codes.get(ch);
+        }
+        return encoded;
+    }
+    
     public static double calculateCompressionRatio(String original, String encoded) {
-        // TODO: 원본 텍스트와 인코딩된 텍스트의 압축률을 계산하세요.
-        // 압축률 = (인코딩된 비트 수 / 원본 비트 수) * 100
-        // 원본 비트 수는 ASCII 기준 8비트 * 문자열 길이
-        return 0.0;
+        int originalBits = original.length() * 8;
+        int encodedBits = encoded.length();
+        return (double)encodedBits / originalBits * 100;
     }
 } 
