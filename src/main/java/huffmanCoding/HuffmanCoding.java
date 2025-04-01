@@ -30,8 +30,8 @@ public class HuffmanCoding {
     // 문자열의 각 문자 빈도수 계산
     private static HashMap<Character, Integer> calculateFrequency(String text) {
         HashMap<Character, Integer> freq = new HashMap<>();
-        for (char c : text.toCharArray()) {
-            freq.put(c, freq.getOrDefault(c, 0) + 1);
+        for(char c: text.toCharArray()){
+            
         }
         return freq;
     }

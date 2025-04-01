@@ -18,8 +18,8 @@ public class Itm {
                 current = current.right;
             } else { // 문자가 일치하는 경우
                 //만약 포지션이 끝에 있다면
-                if (position == word.length() - 1) {
-                    return current.isEndOfString;
+                if (current.isEndOfString) {
+                    return true;
                 }
                 current = current.eq;
                 position++;
