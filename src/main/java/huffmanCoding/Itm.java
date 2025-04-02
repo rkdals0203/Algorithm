@@ -21,13 +21,21 @@ public class Itm {
         while(pq.size() > 1) {
             Node left = pq.poll();
             Node right = pq.poll();
-            Node parent = new Node('', left.frequency + right.frequency);
+            Node parent = new Node('\0', left.frequency + right.frequency);
             parent.left = left;
             parent.right = right;
             pq.add(parent);
         }
         
         return pq.poll();
+    }
+
+    public static HashMap<Character, String> generateCodes(Node root) {
+        // TODO: 구현하세요
+        // 1. 트리를 순회하며 각 문자의 코드 생성
+        // 2. 왼쪽 자식으로 이동할 때는 '0' 추가
+        // 3. 오른쪽 자식으로 이동할 때는 '1' 추가
+        return null;
     }
     
     public static String encode(String text) {

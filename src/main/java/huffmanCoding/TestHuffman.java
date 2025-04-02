@@ -26,7 +26,7 @@ public class TestHuffman {
         }
         
         // 인코딩
-        String encoded = Itm.encode(text, codes);
+        String encoded = Itm.encode(text);
         System.out.println("\n인코딩된 텍스트: " + encoded);
         
         // 디코딩

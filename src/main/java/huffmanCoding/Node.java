@@ -1,10 +1,10 @@
 package main.java.huffmanCoding;
 
 public class Node implements Comparable<Node> {
-    int frequency;  // 문자 빈도수
-    char character; // 문자
-    Node left;
-    Node right;
+    char character;  // 문자
+    int frequency;   // 빈도수
+    Node left;       // 왼쪽 자식
+    Node right;      // 오른쪽 자식
     
     public Node(char character, int frequency) {
         this.character = character;
@@ -21,7 +21,8 @@ public class Node implements Comparable<Node> {
     }
     
     @Override
-    public int compareTo(Node node) {
-        return this.frequency - node.frequency;
+    public int compareTo(Node other) {
+        // 빈도수를 기준으로 노드 비교
+        return this.frequency - other.frequency;
     }
 } 
