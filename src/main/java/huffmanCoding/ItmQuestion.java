@@ -109,16 +109,16 @@ public class ItmQuestion {
         }
         
         // 왼쪽 서브트리 탐색 (0 추가)
-        String leftPath = findCode(node.left, target, path + "0");
-        if (!leftPath.isEmpty()) {
+        String leftPath = findCode(node.left, target, path+"0");
+        if(!leftPath.isEmpty()){
             return leftPath;
         }
-        // 오른쪽 서브트리 탐색 (1 추가)
-        String rightPath = findCode(node.right, target, path + "1");
-        if (!rightPath.isEmpty()) {
+
+        String rightPath = findCode(node.right, target, path+"1");
+        if(!rightPath.isEmpty()){
             return rightPath;
         }
-
+        
         return "";
     }
 
