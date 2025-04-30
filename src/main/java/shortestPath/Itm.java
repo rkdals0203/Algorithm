@@ -6,14 +6,14 @@ import java.util.Queue;
 public class Itm {
 
     public enum KnightMove {
-        UP_LEFT(-1, 2),
-        UP_RIGHT(-1, -2),
-        DOWN_LEFT(1, 2),
-        DOWN_RIGHT(1, -2),
-        LEFT_UP(-2, 1),
-        LEFT_DOWN(-2, -1),
-        RIGHT_UP(2, 1),
-        RIGHT_DOWN(2, -1);
+        UP_LEFT(-1, -2),
+        UP_RIGHT(-1, 2),
+        DOWN_LEFT(1, -2),
+        DOWN_RIGHT(1, 2),
+        LEFT_UP(-2, -1),
+        LEFT_DOWN(-2, 1),
+        RIGHT_UP(2, -1),
+        RIGHT_DOWN(2, 1);
         private final int rowChange;
         private final int colChange;
         KnightMove(int rowChange, int colChange) {
@@ -23,11 +23,12 @@ public class Itm {
     }
 
     public int minKnightMoves(int N, int M, int R, int C, int S, int K){
-        int[][] visit = new int[M][N];
+        int[][] visit = new int[N][M];
 
         Queue<Position> q = new LinkedList<>();
         Position startPosition = new Position(R, C, 0);
         q.add(startPosition);
+        visit[R][C] = 1;
 
         while(!q.isEmpty()){
             Position currentPosition = q.poll();
@@ -35,15 +36,15 @@ public class Itm {
                 return currentPosition.count;
             }
             for(KnightMove dir: KnightMove.values()){
-                int newCol = currentPosition.column + dir.colChange;
                 int newRow = currentPosition.row + dir.rowChange;
+                int newCol = currentPosition.column + dir.colChange;
                 int newCount = currentPosition.count+1;
                 if(
-                        (newCol < M && newCol >= 0)
-                        && (newRow < N && newRow >= 0)
-                        && (visit[newCol][newRow] == 0)
+                        (newRow >= 0 && newRow < N)
+                        && (newCol >= 0 && newCol < M)
+                        && (visit[newRow][newCol] == 0)
                 ){
-                    visit[newCol][newRow] = 1;
+                    visit[newRow][newCol] = 1;
                     q.add(new Position(newRow,newCol,newCount));
                 }
             }
