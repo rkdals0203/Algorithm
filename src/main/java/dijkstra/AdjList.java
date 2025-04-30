@@ -64,21 +64,24 @@ public class AdjList {
      * @return 시작 정점으로부터 각 정점까지의 최단 거리를 담은 배열. 도달할 수 없는 경우 Integer.MAX_VALUE가 저장됩니다.
      */
     public int[] dijkstra(int startVertex) {
-        int[] dist = new int[this.numVertices];
+        int[] dist = new int[numVertices];
         Arrays.fill(dist, Integer.MAX_VALUE);
         dist[startVertex] = 0;
+
         PriorityQueue<Node> pq = new PriorityQueue<>();
         pq.add(new Node(startVertex, 0));
-        while (!pq.isEmpty()) {
+
+        while(!pq.isEmpty()){
             Node currentNode = pq.poll();
-            for (Node neighbor : this.adjList.get(currentNode.vertex)) {
+            for(Node neighbor: adjList.get(currentNode.vertex)){
                 int newDistance = dist[currentNode.vertex] + neighbor.distance;
-                if (newDistance < dist[neighbor.vertex]) {
+                if(newDistance<dist[neighbor.vertex]){
                     dist[neighbor.vertex] = newDistance;
-                    pq.add(new Node(neighbor.vertex, newDistance));
+                    pq.add(new Node(neighbor.vertex,newDistance));
                 }
             }
         }
+
         return dist;
     }
 } 
