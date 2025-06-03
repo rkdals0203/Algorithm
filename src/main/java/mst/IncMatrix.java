@@ -39,10 +39,14 @@ public class IncMatrix implements Graph {
     }
 
     @Override
-    public int[] bfs(int start) { return null; }
+    public int[] bfs(int start) {
+         return null; 
+         }
 
     @Override
-    public int[] dfs(int start) { return null; }
+    public int[] dfs(int start) { 
+        return null; 
+        }
 
     // Extract edges from the incidence matrix
     public List<Edge> getEdges() {
@@ -77,4 +81,5 @@ public class IncMatrix implements Graph {
         
         return mst;
     }
+
 }
