@@ -66,14 +66,15 @@ public class IncMatrix implements Graph {
         Collections.sort(edges);
         DisjointSet ds = new DisjointSet(m.length);
 
-        for(Edge edge : edges){
+        for (Edge edge: edges){
             int currentU = edge.u;
             int currentV = edge.v;
-            if(ds.find(currentU)!=ds.find(currentV)){
-                mst.add(edge);
-                ds.union(currentU,currentV);
-            }
 
+            if(ds.find(currentU) != ds.find(currentV)){
+                mst.add(edge);
+                ds.union(currentU, currentV);
+            }
+            
         }
 
         return mst;
