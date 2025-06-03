@@ -37,18 +37,15 @@ public class IncMatrix implements Graph {
         sb.append("\n");
         return sb.toString();
     }
-
     @Override
     public int[] bfs(int start) {
-         return null; 
+         return null;
          }
-
     @Override
-    public int[] dfs(int start) { 
-        return null; 
+    public int[] dfs(int start) {
+        return null;
         }
 
-    // Extract edges from the incidence matrix
     public List<Edge> getEdges() {
         List<Edge> edges = new ArrayList<>();
         for (int j = 0; j < cur; j++) {
@@ -65,6 +62,20 @@ public class IncMatrix implements Graph {
 
         public List<Edge> kruskalMST() {
         List<Edge> mst = new ArrayList<>();
+        List<Edge> edges = getEdges();
+        Collections.sort(edges);
+        DisjointSet ds = new DisjointSet(m.length);
+
+        for(Edge edge : edges){
+            int currentU = edge.u;
+            int currentV = edge.v;
+            if(ds.find(currentU)!=ds.find(currentV)){
+                mst.add(edge);
+                ds.union(currentU,currentV);
+            }
+
+        }
+
         return mst;
     }
 }
