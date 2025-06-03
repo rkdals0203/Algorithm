@@ -34,14 +34,5 @@ public class GraphTest {
             incMatrix.addEdge(edge[0], edge[1], edge[2]);
         }
 
-        // Print the graph representations
-        System.out.println("Adjacency List Representation:"+ adjList.toString());
-        System.out.println();
-
-        System.out.println("\nAdjacency Matrix Representation:");
-        System.out.println(adjMatrix.toString());
-
-        System.out.println("\nIncidence Matrix Representation:");
-        System.out.println(incMatrix.toString());
     }
 }

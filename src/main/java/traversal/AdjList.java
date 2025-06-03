@@ -1,7 +1,8 @@
 package main.java.traversal;
-
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class AdjList<T extends Edge> implements Graph {
     private List<List<T>> adjList;
@@ -33,32 +34,58 @@ public class AdjList<T extends Edge> implements Graph {
 
 	@Override
 	public int[] bfs(int start) {
-		// TODO Auto-generated method stub
-		return null;
+		boolean[] visited = new boolean[adjList.size()];
+        List<Integer> traversalOrder = new ArrayList<>();
+
+        Queue<Integer> queue = new LinkedList<>();
+        visited[start] = true;
+        queue.add(start);
+
+        while(!queue.isEmpty()){
+            int vertex = queue.poll();
+            traversalOrder.add(vertex);
+
+            for(Edge edge: adjList.get(vertex)){
+                int neighbor = edge.getHead();
+                if(visited[neighbor]==false){
+                    visited[neighbor]=true;
+                    queue.add(neighbor);
+                }
+            }
+        }
+
+        int[] result = new int[traversalOrder.size()];
+        for(int i = 0; i<traversalOrder.size(); i++){
+            result[i] = traversalOrder.get(i);
+        }
+        return result;
+
 	}
 
 	@Override
 	public int[] dfs(int start) {
-		boolean[] visited = new boolean[adjList.size()];
-		List<Integer> traversalOrder = new ArrayList<>();
-		dfsHelper(start, visited, traversalOrder);
-		
+        boolean[] visited = new boolean[adjList.size()];
+        List<Integer> traversalOrder = new ArrayList<>();
+
+        dfsHelper(start, visited, traversalOrder);
         int[] result = new int[traversalOrder.size()];
-        for (int i = 0; i < traversalOrder.size(); i++) {
+        for(int i = 0; i<traversalOrder.size(); i++){
             result[i] = traversalOrder.get(i);
         }
-        return result;	
+        return result;
+    }
+    public void dfsHelper(int vertex, boolean[] visited, List<Integer> traversalOrder) {
+        visited[vertex] = true;
+        traversalOrder.add(vertex);
+
+        for(Edge edge : adjList.get(vertex)){
+            int neighbor = edge.getHead();
+            if(!visited[neighbor]){
+                dfsHelper(neighbor,visited,traversalOrder);
+            }
+
         }
+    }
 
-	private void dfsHelper(int vertex, boolean[] visited, List<Integer> traversalOrder) {
-		visited[vertex] = true;
-		traversalOrder.add(vertex);
 
-		for (T edge : adjList.get(vertex)) {
-			int neighbor = edge.getHead();
-			if (!visited[neighbor]) {
-				dfsHelper(neighbor, visited, traversalOrder);
-			}
-		}
-	}
 }

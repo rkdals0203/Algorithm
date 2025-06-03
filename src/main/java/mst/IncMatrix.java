@@ -62,24 +62,9 @@ public class IncMatrix implements Graph {
         return edges;
     }
 
-    
-    public List<Edge> kruskalMST() {
+
+        public List<Edge> kruskalMST() {
         List<Edge> mst = new ArrayList<>();
-        List<Edge> edges = getEdges();
-        Collections.sort(edges);
-        DisjointSet ds = new DisjointSet(m.length);
-        
-        for (Edge edge : edges) {
-            int rootU = ds.find(edge.u);
-            int rootV = ds.find(edge.v);
-            
-            if (rootU != rootV) {
-                mst.add(edge);
-                ds.union(edge.u, edge.v);
-            }
-        }
-        
         return mst;
     }
-
 }

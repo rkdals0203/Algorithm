@@ -18,6 +18,15 @@ public class CompleteGraphTest {
                 }
             }
         }
+
+        for(int i = 0; i<numVertices; i++){
+            for(int j = 0; j<numVertices; j++){
+                if(i!=j){
+                    adjList.addEdge(i,j,1.0);
+                    adjMatrix.addEdge(i,j,1.0);
+                }
+            }
+        }
         
         int edgeCount = 0;
         for (int i = 0; i < numVertices; i++) {
